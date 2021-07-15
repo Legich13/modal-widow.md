@@ -1,13 +1,28 @@
-const openModal = document.getElementById('btn-open-modal');
-const modal = document.getElementById('modal');
+const openModalButton = document.querySelector('.button__open-modal') // кнопка вкл модал
 
-openModal.onclick = () =>  modal.style.display='flex' 
+const windowModal = document.querySelector('.modal-overlay') // получение элемента модалки 
 
-const ofModal = Array.prototype.forEach.call(document.querySelectorAll(".modal-bloc_close-modal, .modal-block-canceled"),(e) => e.addEventListener("click", () => {
-    modal.style.display='none'
-}))
+const closeModal = document.querySelectorAll('.close-trigger'); // получение элементов для закрытия 
 
-window.onclick = (event) => event.target == modal ? modal.style.display = "none": null 
+const  closeKayDown = document.addEventListener('keydown', () => { // ивент закрытия ESC
+    windowModal.style.display='none'
+})
+ 
+
+openModalButton.addEventListener('click',()=>{
+    windowModal.style.display='flex'
+    console.log(closeModal)
+})
+
+for(let i = 0 ; i < closeModal.length ; i++) {
+    const btn = closeModal[i]; 
+    btn.addEventListener('click' , () => windowModal.style.display='none')
+}
+
+windowModal.addEventListener('mousedown',(e)=>{
+    e.target === windowModal ? windowModal.style.display='none': null 
+})  
+
 
 
 
