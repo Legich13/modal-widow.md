@@ -3,10 +3,11 @@ const openModalButton = document.querySelector('.button__open-modal') // кно�
 const windowModal = document.querySelector('.modal-overlay') // получение элемента модалки 
 
 const closeModal = document.querySelectorAll('.close-trigger'); // получение элементов для закрытия 
-
+/*
 const  closeKayDown = document.addEventListener('keydown', () => { // ивент закрытия ESC
     windowModal.style.display='none'
 })
+*/
  
 
 openModalButton.addEventListener('click',()=>{
