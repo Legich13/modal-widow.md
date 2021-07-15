@@ -5,7 +5,7 @@ const windowModal = document.querySelector('.modal-overlay') // получени
 const closeModal = document.querySelectorAll('.close-trigger'); // получение элементов для закрытия 
 
 const  closeKayDown = document.addEventListener('keydown', () => { // ивент закрытия ESC
-     event.code === 'keyEscape' ? windowModal.style.display='none': null 
+     event.key === 'Escape' ? windowModal.style.display='none': null 
 })
 
  
