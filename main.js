@@ -8,11 +8,8 @@ const  closeKayDown = document.addEventListener('keydown', () => { // ивент
      event.key === 'Escape' ? windowModal.style.display='none': null 
 })
 
- 
-
 openModalButton.addEventListener('click',()=>{
     windowModal.style.display='flex'
-    console.log(closeModal)
 })
 
 for(let i = 0 ; i < closeModal.length ; i++) {
