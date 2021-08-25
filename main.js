@@ -68,35 +68,44 @@
     });
    
  
-const openModalButton = document.querySelector('.button__open-modal') // кнопка вкл модал
+  // обработчик модального окна
+if (document.querySelector('.button__open-modal')){
+    const openModalButton = document.querySelector('.button__open-modal') // кнопка вкл модал
+    const windowModal = document.querySelector('.modal-overlay') // получение элемента модалки
+    const closeModal = document.querySelectorAll('.close-trigger'); // получение элементов для закрытия
 
-const windowModal = document.querySelector('.modal-overlay') // получение элемента модалки 
+    openModalButton.addEventListener('click',()=>{
+        windowModal.style.display='flex'
+    })
 
-const closeModal = document.querySelectorAll('.close-trigger'); // получение элементов для закрытия 
+    // закрытие на нажатие Esc
 
+    document.addEventListener('keydown', () => {
+        event.key === 'Escape' ? windowModal.style.display='none': null
+    })
 
- const  closeKayDown = document.addEventListener('keydown', () => { // ивент закрытия ESC
-    
-      event.key === 'Escape' ? windowModal.style.display='none': null 
- })
+    // цикл от ложного закрытия модального окна
 
-openModalButton.addEventListener('click',()=>{ 
-    windowModal.style.display='flex'
-})
+    for(let i = 0 ; i < closeModal.length ; i++) {
+        const btn = closeModal[i];
+        btn.addEventListener('click' , () => windowModal.style.display='none')
+    }
+    // обработчик нажатия только на левую кнопку
 
-for(let i = 0 ; i < closeModal.length ; i++) {
-
-    const btn = closeModal[i]; 
-
-    btn.addEventListener('click' , () => windowModal.style.display='none')
-
+    windowModal.addEventListener('mousedown',  (e)=>{
+        e.target === windowModal && e.which === 1 ? windowModal.style.display='none': null
+    })
 }
+    // проверка на пустое поле в имени
 
-windowModal.addEventListener('mousedown',  (e)=>{
-
-    e.target === windowModal ? windowModal.style.display='none': null 
-
-})  
+if(document.querySelectorAll('.cx-form-examination-name').length){
+    const formNameExamination = document.querySelectorAll('.cx-form-examination-name')
+    formNameExamination.forEach((i) => {
+        i.oninput = () => {
+            if(i.value.charAt(0) === ' ') {
+                i.value = '';
+            }}
+})}
 
 
 
