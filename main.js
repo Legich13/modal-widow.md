@@ -29,7 +29,7 @@
 
 
 
- // =====================================================================================================
+// =====================================================================================================
 
 // описание работы плагина
 
@@ -37,11 +37,15 @@
     // инпут телефон class cx-form-examination-tel
     // работа modal window дата атрибут по типу:data-modal="front-modal" class modal-overlay
     // запуск modal window кнопка class button__open-modal
+    // пример кнопки <a href="#modal" class="cx-btn button__open-modal" data-modal="modal-product" >Заказать товар</a>
+    // кнопки нужно дать тот атрибут которое должно вызывать 
 
 // =======================================================================================================
 
 
 // регулярка на номер телефона
+
+if(document.querySelectorAll('.cx-form-examination-tel')){
  window.addEventListener("DOMContentLoaded", function() {
         [].forEach.call( document.querySelectorAll('.cx-form-examination-tel'), function(input) {      
         var keyCode;
@@ -69,9 +73,7 @@
             if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) this.value = new_value;
             if (event.type == "blur" && this.value.length < 5)  this.value = ""
 			
-        }
-
-     
+        }     
         input.addEventListener("input", mask, true);
         input.addEventListener("focus", mask, false);
         input.addEventListener("blur", mask, false);
@@ -80,41 +82,46 @@
       });
      
     });
-
+}
     // обработчик модального окна
-if (document.querySelector('.button__open-modal')){
+if(document.querySelector('.button__open-modal')){
     const openModalButton = document.querySelectorAll('.button__open-modal') // кнопка вкл модал
-    const closeModal = document.querySelectorAll('.close-trigger'); // получение элементов для закрытия
-
+    const closeModal = document.querySelectorAll('.close-trigger') // получение элементов для закрытия
+   //цикл функция обработка нажатий 
     openModalButton.forEach((itme)=>{
+
         itme.addEventListener('click',()=>{
         const  modalDataId = itme.getAttribute('data-modal');
         const  windowModal = document.querySelector('.modal-overlay[data-modal="' + modalDataId  + '"]');
-
+            // вызов модалки и ofscrol 
             windowModal.style.display='flex'
-
+            document.body.style.overflow='hidden'
             // закрытие на нажатие Esc
-
             document.addEventListener('keydown', () => {
-                event.key === 'Escape' ? windowModal.style.display='none': null
+                if(event.key === 'Escape'){
+                    windowModal.style.display='none' 
+                    document.body.removeAttribute('style')
+                }
             })
-
             // цикл от ложного закрытия модального окна
-
             for(let i = 0 ; i < closeModal.length ; i++) {
                 const btn = closeModal[i];
-                btn.addEventListener('click' , () => windowModal.style.display='none')
+                btn.addEventListener('click' , () =>{ 
+                    windowModal.style.display='none' 
+                    if(windowModal.style.display='none'){
+                        document.body.removeAttribute('style')
+                    }
+                })
             }
             // обработчик нажатия только на левую кнопку
-
             windowModal.addEventListener('mousedown',  (e)=>{
-                e.target === windowModal && e.which === 1 ? windowModal.style.display='none': null
+                if(e.target === windowModal && e.which === 1 ){
+                    windowModal.style.display='none' 
+                    document.body.removeAttribute('style')
+                }
             })
         })
     })
-
-
-
 }
     // проверка на пустое поле в имени
 
